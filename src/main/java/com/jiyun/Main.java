@@ -7,7 +7,7 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
-        Kiosk kiosk = new Kiosk(new Menu());
+        Kiosk kiosk = new Kiosk(new Menu(), new Cart());
         kiosk.start(scanner);
     }
 }
