@@ -16,9 +16,16 @@ public class Kiosk {
                 System.out.println(menu.getMenuItems().get(i - 1));
             }
             System.out.println("0. 종료");
-            String s = scanner.nextLine();
-            if (s.equals("0")) {
+            String inputString = scanner.nextLine();
+            if (inputString.equals("0")) {
                 return;
+            } else {
+                try {
+                    int inputNum = Integer.parseInt(inputString);
+                    System.out.println("선택한 메뉴: " + menu.getMenuItems().get(inputNum - 1));
+                } catch (NumberFormatException e) {
+                    System.out.println("숫자를 입력해 주세요.");
+                }
             }
         }
     }
