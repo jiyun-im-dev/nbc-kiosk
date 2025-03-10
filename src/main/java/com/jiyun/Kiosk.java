@@ -16,6 +16,9 @@ public class Kiosk {
             // 메인 메뉴 출력
             printMainMenu();
 
+            printMenu(scanner);
+
+
             // 메뉴 항목 출력 및 선택
             String inputString = scanner.nextLine();
             try {
@@ -58,6 +61,10 @@ public class Kiosk {
             System.out.println("4. Orders       | 장바구니를 확인 후 주문합니다.");
             System.out.println("5. Cancel       | 진행중인 주문을 취소합니다.");
         }
+    }
+
+    private void printMenu(Scanner scanner) {
+
     }
 
     private <T> void selectMenu(Scanner scanner, List<T> list) throws Exception {

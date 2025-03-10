@@ -7,6 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class MenuItem {
 
+    private Category category;
     private String name;
     private Integer price;
     private String description;
