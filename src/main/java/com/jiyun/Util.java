@@ -2,6 +2,7 @@ package com.jiyun;
 
 import com.jiyun.enums.Message;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Util {
@@ -16,6 +17,13 @@ public class Util {
             } catch (Exception e) {
                 System.out.println(Message.SYSTEM_ERROR);
             }
+        }
+    }
+
+    public static <T> void printList(List<T> list) {
+        for (int i = 1; i <= list.size(); i++) {
+            System.out.print(i + ". ");
+            System.out.println(list.get(i - 1));
         }
     }
 

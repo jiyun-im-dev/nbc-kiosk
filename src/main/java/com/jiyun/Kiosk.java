@@ -73,22 +73,22 @@ public class Kiosk {
                         order(scanner);
                         return null;
                     } else {
-                        System.out.println(Message.WRONG_INPUT);
+                        System.out.println(Message.WRONG_INPUT.getContent());
                     }
                 } else if (inputNum == Category.values().length + 2) {
                     if (!cart.isEmpty()) {
                         cancelOrder();
                         return null;
                     } else {
-                        System.out.println(Message.WRONG_INPUT);
+                        System.out.println(Message.WRONG_INPUT.getContent());
                     }
                 } else {
-                    System.out.println(Message.WRONG_INPUT);
+                    System.out.println(Message.WRONG_INPUT.getContent());
                 }
             } catch (NumberFormatException e) {
-                System.out.println(Message.NUMBER_ERROR);
+                System.out.println(Message.NUMBER_ERROR.getContent());
             } catch (Exception e) {
-                System.out.println(Message.SYSTEM_ERROR);
+                System.out.println(Message.SYSTEM_ERROR.getContent());
             }
         }
     }
@@ -103,26 +103,20 @@ public class Kiosk {
     // 주문할 메뉴 선택
     private <T> void selectMenuItem(Scanner scanner, List<MenuItem> menuItems) {
         try {
-            String inputString = scanner.nextLine();
-            int inputNum = Integer.parseInt(inputString);
+            int inputNum = getIntegerInput(scanner);
             MenuItem selectedMenu = menuItems.get(inputNum - 1);
             System.out.println("선택한 메뉴: " + selectedMenu);
 
             System.out.println("위 메뉴를 장바구니에 추가하시겠습니까?");
             System.out.println("1. 확인     2. 취소");
-            inputString = scanner.nextLine();
-            inputNum = Integer.parseInt(inputString);
+            inputNum = getIntegerInput(scanner);
             switch (inputNum) {
                 case 1 -> cart.add(selectedMenu);
                 case 2 -> {}
-                default -> System.out.println(Message.WRONG_INPUT);
+                default -> System.out.println(Message.WRONG_INPUT.getContent());
             }
-        } catch (NumberFormatException e) {
-            System.out.println(Message.NUMBER_ERROR);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(Message.WRONG_INPUT);
-        } catch (Exception e) {
-            System.out.println(Message.SYSTEM_ERROR);
+            System.out.println(Message.WRONG_INPUT.getContent());
         }
     }
 
@@ -150,7 +144,7 @@ public class Kiosk {
                 return; // 메뉴판으로 돌아감
             }
             default -> {
-                System.out.println(Message.WRONG_INPUT);
+                System.out.println(Message.WRONG_INPUT.getContent());
                 return;
             }
         }
@@ -159,13 +153,6 @@ public class Kiosk {
     private void cancelOrder() {
         System.out.println("주문이 취소되었습니다. 초기 화면으로 되돌아갑니다.");
         cart.clear();
-    }
-
-    private <T> void printList(List<T> list) {
-        for (int i = 1; i <= list.size(); i++) {
-            System.out.print(i + ". ");
-            System.out.println(list.get(i - 1));
-        }
     }
 
 }
