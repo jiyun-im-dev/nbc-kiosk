@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 import static com.jiyun.Util.getIntegerInput;
 
@@ -54,36 +53,35 @@ public class Kiosk {
 
     // 메인 메뉴(Burgers, Drinks...) 선택
     private List<MenuItem> selectMenu() {
-        while (true) {
-            int inputNum = getIntegerInput();
+        int inputNum = getIntegerInput();
 
-            // 0을 입력하면 프로그램 종료
-            if (inputNum == 0) {
-                System.exit(0);
-            } else if (inputNum <= Category.values().length) {
-                // 선택한 카테고리의 MenuItem 만 들어 있는 리스트를 생성
-                List<MenuItem> menuItems = menu.getMenuItems().stream()
-                        .filter(item -> item.getCategory().getIndex() == inputNum)
-                        .toList();
-                return menuItems;
-            } else if (inputNum == Category.values().length + 1) {
-                if (!cart.isEmpty()) {
-                    order();
-                    return null;
-                } else {
-                    System.out.println(Message.WRONG_INPUT.getContent());
-                }
-            } else if (inputNum == Category.values().length + 2) {
-                if (!cart.isEmpty()) {
-                    cancelOrder();
-                    return null;
-                } else {
-                    System.out.println(Message.WRONG_INPUT.getContent());
-                }
+        // 0을 입력하면 프로그램 종료
+        if (inputNum == 0) {
+            System.exit(0);
+        } else if (inputNum <= Category.values().length) {
+            // 선택한 카테고리의 MenuItem 만 들어 있는 리스트를 생성
+            List<MenuItem> menuItems = menu.getMenuItems().stream()
+                    .filter(item -> item.getCategory().getIndex() == inputNum)
+                    .toList();
+            return menuItems;
+        } else if (inputNum == Category.values().length + 1) {
+            if (!cart.isEmpty()) {
+                order();
+                return null;
             } else {
                 System.out.println(Message.WRONG_INPUT.getContent());
             }
+        } else if (inputNum == Category.values().length + 2) {
+            if (!cart.isEmpty()) {
+                cancelOrder();
+                return null;
+            } else {
+                System.out.println(Message.WRONG_INPUT.getContent());
+            }
+        } else {
+            System.out.println(Message.WRONG_INPUT.getContent());
         }
+        return null;
     }
 
     private void printMenuItems(List<MenuItem> menuItems) {
@@ -93,7 +91,7 @@ public class Kiosk {
         }
     }
 
-    // 주문할 메뉴 선택
+    // 선택한 카테고리에서 주문할 메뉴 선택
     private <T> void selectMenuItem(List<MenuItem> menuItems) {
         try {
             int inputNum = getIntegerInput();
@@ -118,6 +116,7 @@ public class Kiosk {
         System.out.println("아래와 같이 주문 하시겠습니까?");
         System.out.println("[ Orders ]");
         cart.print(); // 장바구니에 담긴 모든 메뉴 출력
+
         System.out.println("[ Total ]");
         System.out.println(cart.calculateTotal() + "원"); // 총액 출력
         System.out.println("1. 주문      2. 메뉴판");
@@ -127,20 +126,15 @@ public class Kiosk {
         switch (inputNum) {
             case 1 -> {
                 Discount.print(); // 할인 정보 출력
-
                 // 할인 타입을 숫자로 받아서 Discount 타입으로 변경
                 Discount discountType = Discount.values()[getIntegerInput() - 1];
-
                 System.out.println("주문이 완료되었습니다. 금액은 " + cart.calculateTotalWithDiscount(discountType) + "원입니다.");
                 cart.clear();
-                return;
             }
             case 2 -> {
-                return; // 메뉴판으로 돌아감
-            }
+            } // 메뉴판으로 돌아감
             default -> {
                 System.out.println(Message.WRONG_INPUT.getContent());
-                return;
             }
         }
     }
