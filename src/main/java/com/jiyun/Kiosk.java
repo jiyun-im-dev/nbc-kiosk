@@ -65,22 +65,22 @@ public class Kiosk {
                         order(scanner);
                         return null;
                     } else {
-                        System.out.println("올바른 값을 입력해 주세요.");
+                        System.out.println(Message.WRONG_INPUT);
                     }
                 } else if (inputNum == Category.values().length + 2) {
                     if (!cart.isEmpty()) {
                         cancelOrder();
                         return null;
                     } else {
-                        System.out.println("올바른 값을 입력해 주세요.");
+                        System.out.println(Message.WRONG_INPUT);
                     }
                 } else {
-                    System.out.println("올바른 값을 입력해 주세요.");
+                    System.out.println(Message.WRONG_INPUT);
                 }
             } catch (NumberFormatException e) {
-                System.out.println("숫자를 입력해 주세요.");
+                System.out.println(Message.NUMBER_ERROR);
             } catch (Exception e) {
-                System.out.println("시스템 에러가 발생했습니다.");
+                System.out.println(Message.SYSTEM_ERROR);
             }
         }
     }
@@ -107,14 +107,14 @@ public class Kiosk {
             switch (inputNum) {
                 case 1 -> cart.add(selectedMenu);
                 case 2 -> {}
-                default -> System.out.println("올바른 값을 입력해 주세요.");
+                default -> System.out.println(Message.WRONG_INPUT);
             }
         } catch (NumberFormatException e) {
-            System.out.println("숫자를 입력해 주세요.");
+            System.out.println(Message.NUMBER_ERROR);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("올바른 값을 입력해 주세요.");
+            System.out.println(Message.WRONG_INPUT);
         } catch (Exception e) {
-            System.out.println("시스템 에러가 발생했습니다.");
+            System.out.println(Message.SYSTEM_ERROR);
         }
     }
 
