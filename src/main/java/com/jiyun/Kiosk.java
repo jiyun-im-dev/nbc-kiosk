@@ -69,17 +69,17 @@ public class Kiosk {
                 order();
                 return null;
             } else {
-                System.out.println(Message.WRONG_INPUT.getContent());
+                Message.WRONG_INPUT.print();
             }
         } else if (inputNum == Category.values().length + 2) {
             if (!cart.isEmpty()) {
                 cancelOrder();
                 return null;
             } else {
-                System.out.println(Message.WRONG_INPUT.getContent());
+                Message.WRONG_INPUT.print();
             }
         } else {
-            System.out.println(Message.WRONG_INPUT.getContent());
+            Message.WRONG_INPUT.print();
         }
         return null;
     }
@@ -105,10 +105,10 @@ public class Kiosk {
                 case 1 -> cart.add(selectedMenu);
                 case 2 -> {
                 }
-                default -> System.out.println(Message.WRONG_INPUT.getContent());
+                default -> Message.WRONG_INPUT.print();
             }
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(Message.WRONG_INPUT.getContent());
+            Message.WRONG_INPUT.print();
         }
     }
 
@@ -134,7 +134,7 @@ public class Kiosk {
             case 2 -> {
             } // 메뉴판으로 돌아감
             default -> {
-                System.out.println(Message.WRONG_INPUT.getContent());
+                Message.WRONG_INPUT.print();
             }
         }
     }

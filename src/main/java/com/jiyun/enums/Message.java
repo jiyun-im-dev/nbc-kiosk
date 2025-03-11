@@ -13,4 +13,8 @@ public enum Message {
 
     private final String content;
 
+    public void print() {
+        System.out.println(content);
+    }
+
 }

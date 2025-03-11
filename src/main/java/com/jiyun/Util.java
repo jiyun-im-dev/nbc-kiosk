@@ -15,9 +15,9 @@ public class Util {
                 String inputString = scanner.nextLine();
                 return Integer.parseInt(inputString);
             } catch (NumberFormatException e) {
-                System.out.println(Message.NUMBER_ERROR.getContent());
+                Message.NUMBER_ERROR.print();
             } catch (Exception e) {
-                System.out.println(Message.SYSTEM_ERROR.getContent());
+                Message.SYSTEM_ERROR.print();
             }
         }
     }
