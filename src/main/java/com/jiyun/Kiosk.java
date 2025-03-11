@@ -70,6 +70,7 @@ public class Kiosk {
                 } else if (inputNum == Category.values().length + 2) {
                     if (!cart.isEmpty()) {
                         cancelOrder();
+                        return null;
                     } else {
                         System.out.println("올바른 값을 입력해 주세요.");
                     }
@@ -146,7 +147,8 @@ public class Kiosk {
     }
 
     private void cancelOrder() {
-        // TODO: 주문 취소 로직 작성
+        System.out.println("주문이 취소되었습니다. 초기 화면으로 되돌아갑니다.");
+        cart.clear();
     }
 
     private <T> void printList(List<T> list) {
