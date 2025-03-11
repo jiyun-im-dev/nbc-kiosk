@@ -1,5 +1,7 @@
 package com.jiyun;
 
+import com.jiyun.enums.Category;
+import com.jiyun.enums.Message;
 import lombok.AllArgsConstructor;
 
 import java.util.Arrays;

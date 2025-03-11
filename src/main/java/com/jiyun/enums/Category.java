@@ -1,4 +1,4 @@
-package com.jiyun;
+package com.jiyun.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,5 +1,6 @@
 package com.jiyun;
 
+import com.jiyun.enums.Category;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
