@@ -54,33 +54,38 @@ public class Kiosk {
     // 메인 메뉴(Burgers, Drinks...) 선택
     private List<MenuItem> selectMenu() {
         int inputNum = getIntegerInput();
+        int categoryCount = Category.values().length;
 
         // 0을 입력하면 프로그램 종료
         if (inputNum == 0) {
             System.exit(0);
-        } else if (inputNum <= Category.values().length) {
-            // 선택한 카테고리의 MenuItem 만 들어 있는 리스트를 생성
-            List<MenuItem> menuItems = menu.getMenuItems().stream()
+        }
+
+        // 메뉴 카테고리 선택
+        if (inputNum <= categoryCount) {
+            // 선택한 카테고리의 MenuItem 만 들어 있는 리스트를 반환
+            return menu.getMenuItems().stream()
                     .filter(item -> item.getCategory().getIndex() == inputNum)
                     .toList();
-            return menuItems;
-        } else if (inputNum == Category.values().length + 1) {
-            if (!cart.isEmpty()) {
-                order();
-                return null;
-            } else {
-                Message.WRONG_INPUT.print();
-            }
-        } else if (inputNum == Category.values().length + 2) {
-            if (!cart.isEmpty()) {
-                cancelOrder();
-                return null;
-            } else {
-                Message.WRONG_INPUT.print();
-            }
-        } else {
-            Message.WRONG_INPUT.print();
         }
+
+        // 카테고리 개수를 초과한 수를 입력하면 null 을 반환하고 처음으로 돌아감
+        if (cart.isEmpty()) {
+            Message.WRONG_INPUT.print();
+            return null;
+        }
+
+        if (inputNum == categoryCount + 1) {
+            order();
+            return null; // order 로직이 끝나면 처음으로 돌아감
+        }
+
+        if (inputNum == categoryCount + 2) {
+            cancelOrder();
+            return null;
+        }
+
+        Message.WRONG_INPUT.print();
         return null;
     }
 
