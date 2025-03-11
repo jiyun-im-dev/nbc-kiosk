@@ -1,6 +1,7 @@
 package com.jiyun;
 
 import com.jiyun.enums.Category;
+import com.jiyun.enums.Discount;
 import com.jiyun.enums.Message;
 import lombok.AllArgsConstructor;
 
@@ -33,6 +34,9 @@ public class Kiosk {
     }
 
     private void printMainMenu() {
+        System.out.println();
+        System.out.println("========== 키오스크 시작 ==========");
+        System.out.println();
         // 카테고리 출력
         System.out.println("[ MAIN MENU ]");
         Arrays.stream(Category.values()).forEach(s -> System.out.println(s.getIndex() + ". " + s));
@@ -126,26 +130,41 @@ public class Kiosk {
         cart.print(); // 장바구니에 담긴 모든 메뉴 출력
         System.out.println("[ Total ]");
         System.out.println(cart.calculateTotal() + "원"); // 총액 출력
-        System.out.println();
         System.out.println("1. 주문      2. 메뉴판");
         String inputString = scanner.nextLine();
         int inputNum = Integer.parseInt(inputString);
         switch (inputNum) {
             case 1 -> {
-                System.out.println("주문이 완료되었습니다. 금액은 " + cart.calculateTotal() + "원입니다.");
+                Discount.print(); // 할인 정보 출력
+
+                // 할인 타입을 숫자로 받아서 Discount 타입으로 변경
+                Discount discountType = Discount.values()[getIntegerInput(scanner) - 1];
+
+                System.out.println("주문이 완료되었습니다. 금액은 " + cart.calculateTotalWithDiscount(discountType) + "원입니다.");
                 cart.clear();
                 return;
             }
             case 2 -> {
-                return;
+                return; // 메뉴판으로 돌아감
             }
             default -> {
                 System.out.println(Message.WRONG_INPUT);
                 return;
             }
         }
-        // 주문을 선택하면 주문 완료 메시지를 띄우고 장바구니를 비운다.
-        // 메뉴판을 선택하면 메뉴판(버거, 음료, ..)으로 돌아간다.
+    }
+
+    private int getIntegerInput(Scanner scanner) {
+        while (true) {
+            try {
+                String inputString = scanner.nextLine();
+                return Integer.parseInt(inputString);
+            } catch (NumberFormatException e) {
+                System.out.println(Message.NUMBER_ERROR);
+            } catch (Exception e) {
+                System.out.println(Message.SYSTEM_ERROR);
+            }
+        }
     }
 
     private void cancelOrder() {

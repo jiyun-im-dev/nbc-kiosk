@@ -1,5 +1,7 @@
 package com.jiyun;
 
+import com.jiyun.enums.Discount;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,6 +14,15 @@ public class Cart {
         for (Map.Entry<MenuItem, Integer> item : items.entrySet()) {
             total += item.getKey().getPrice() * item.getValue(); // 가격 * 수량
         }
+        return total;
+    }
+
+    public int calculateTotalWithDiscount(Discount discount) {
+        int total = 0;
+        for (Map.Entry<MenuItem, Integer> item : items.entrySet()) {
+            total += item.getKey().getPrice() * item.getValue(); // 가격 * 수량
+        }
+        total -= total / 100 * discount.getPercent();
         return total;
     }
 
