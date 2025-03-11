@@ -9,6 +9,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+import static com.jiyun.Util.getIntegerInput;
+
 @AllArgsConstructor
 public class Kiosk {
 
@@ -150,19 +152,6 @@ public class Kiosk {
             default -> {
                 System.out.println(Message.WRONG_INPUT);
                 return;
-            }
-        }
-    }
-
-    private int getIntegerInput(Scanner scanner) {
-        while (true) {
-            try {
-                String inputString = scanner.nextLine();
-                return Integer.parseInt(inputString);
-            } catch (NumberFormatException e) {
-                System.out.println(Message.NUMBER_ERROR);
-            } catch (Exception e) {
-                System.out.println(Message.SYSTEM_ERROR);
             }
         }
     }
