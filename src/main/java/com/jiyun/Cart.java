@@ -27,4 +27,10 @@ public class Cart {
         return items.isEmpty();
     }
 
+    public void print() {
+        for (MenuItem menuItem : items.keySet()) {
+            System.out.println(items.get(menuItem) + "개 | " + menuItem);
+        }
+    }
+
 }
