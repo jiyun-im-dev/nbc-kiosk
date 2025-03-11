@@ -22,15 +22,7 @@ public class Kiosk {
             printMainMenu();
 
             // 메뉴 카테고리(버거, 음료, 디저트 또는 주문 메뉴) 선택
-            List<MenuItem> menuItems = selectMenu();
-
-            if (menuItems != null) {
-                // 선택한 카테고리의 MenuItem 출력
-                printMenuItems(menuItems);
-
-                // MenuItem 선택
-                selectMenuItem(menuItems);
-            }
+            selectMenu();
         }
     }
 
@@ -52,7 +44,7 @@ public class Kiosk {
     }
 
     // 메인 메뉴(Burgers, Drinks...) 선택
-    private List<MenuItem> selectMenu() {
+    private void selectMenu() {
         int inputNum = getIntegerInput();
         int categoryCount = Category.values().length;
 
@@ -61,32 +53,40 @@ public class Kiosk {
             System.exit(0);
         }
 
-        // 메뉴 카테고리 선택
+        // 메뉴 카테고리를 선택한 경우
         if (inputNum <= categoryCount) {
             // 선택한 카테고리의 MenuItem 만 들어 있는 리스트를 반환
-            return menu.getMenuItems().stream()
-                    .filter(item -> item.getCategory().getIndex() == inputNum)
-                    .toList();
+            List<MenuItem> menuItemsByCategory = getMenuItemsByCategory(Category.values()[inputNum - 1]);
+            printMenuItems(menuItemsByCategory);
+            selectMenuItem(menuItemsByCategory);
+            return;
         }
 
-        // 카테고리 개수를 초과한 수를 입력하면 null 을 반환하고 처음으로 돌아감
+        // 카테고리 개수를 초과한 수를 입력하면 에러 메시지를 출력하고 처음으로 돌아감
         if (cart.isEmpty()) {
             Message.WRONG_INPUT.print();
-            return null;
+            return;
         }
 
+        // 카트에 물건이 담겨 있을 때 주문 메뉴 선택한 경우
         if (inputNum == categoryCount + 1) {
             order();
-            return null; // order 로직이 끝나면 처음으로 돌아감
+            return; // order 로직이 끝나면 처음으로 돌아감
         }
 
+        // 카트에 물건이 담겨 있을 때 주문 취소 메뉴 선택한 경우
         if (inputNum == categoryCount + 2) {
             cancelOrder();
-            return null;
+            return;
         }
 
         Message.WRONG_INPUT.print();
-        return null;
+    }
+
+    private List<MenuItem> getMenuItemsByCategory(Category category) {
+        return menu.getMenuItems().stream()
+                .filter(item -> item.getCategory().getIndex() == category.getIndex())
+                .toList();
     }
 
     private void printMenuItems(List<MenuItem> menuItems) {
