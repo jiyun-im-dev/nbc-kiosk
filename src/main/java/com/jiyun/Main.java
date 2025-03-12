@@ -7,5 +7,6 @@ public class Main {
 
         Kiosk kiosk = new Kiosk(Menu.getMenu(), Cart.getCart());
         kiosk.start();
+
     }
 }

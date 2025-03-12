@@ -30,6 +30,7 @@ public class Kiosk {
         System.out.println();
         System.out.println("========== 키오스크 시작 ==========");
         System.out.println();
+
         // 카테고리 출력
         System.out.println("[ MAIN MENU ]");
         Arrays.stream(Category.values()).forEach(s -> System.out.println(s.getIndex() + ". " + s));
@@ -80,6 +81,7 @@ public class Kiosk {
             return;
         }
 
+        // 그 외의 숫자를 입력한 경우
         Message.WRONG_INPUT.print();
     }
 
@@ -108,8 +110,7 @@ public class Kiosk {
             inputNum = getIntegerInput();
             switch (inputNum) {
                 case 1 -> cart.add(selectedMenu);
-                case 2 -> {
-                }
+                case 2 -> {}
                 default -> Message.WRONG_INPUT.print();
             }
         } catch (IndexOutOfBoundsException e) {
